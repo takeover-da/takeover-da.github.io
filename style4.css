@@ -97,7 +97,7 @@ header h2{
 footer {
 	padding: 10px 0;
 	background-color:#030;
-	color:#fff;
+	color: block;
 	text-align:center;
 	clear: both;
 }
