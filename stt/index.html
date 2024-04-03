@@ -129,6 +129,25 @@
             window.speechSynthesis.speak(speech);
         }
 
+// 15_6. 핸드폰용_음성서비스
+       function PhoneTextToSpeech (message){
+            // html 태그 제거
+
+           // HTML 태그를 제거하기 위해 임시적으로 DOM을 생성합니다.
+           const temporaryElement = $('<div></div>').html(message);
+
+           // p 태그를 모두 찾아내어 제거합니다.
+           temporaryElement.find('p').remove();
+
+           // br 태그를 모두 찾아내어 제거합니다.
+           temporaryElement.find('br').remove();
+
+           // innerText를 사용하여 HTML 태그를 제거한 텍스트를 가져옵니다.
+           const cleanedMessage = temporaryElement.text();
+
+           textToSpeech(message);
+       }
+
 // 15_5. User_Chatbot_라인추가
         // 메세지를 화면에 추가
         function appendMessage(sender, message) {
@@ -139,7 +158,8 @@
 
 // 15_3.
             if (ttsEnabled) {
-                textToSpeech(message);
+// 15_6. 핸드폰용_음성서비스 textToSpeech => PhoneTextToSpeech 로 수정.
+                PhoneTextToSpeech(message);
             }
         }
 
@@ -265,7 +285,7 @@
                 chatContainer.append(message);
                 // 하나의 메세지에 대해 음성 서비스를 제공한다.
                 if (ttsEnabled) {
-                    textToSpeech(message);
+                    PhoneTextToSpeech(message);
                 }
                 chatContainer.scrollTop(chatContainer.prop('scrollHeight'));
             }, 500);
